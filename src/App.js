@@ -1,25 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react'
+import {
+  InstantSearch,
+  SearchBox,
+  Hits,
+  Highlight
+} from 'react-instantsearch/dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+const Hit = ({hit}) => 
+<div className="hit">
+<div className="hit-image">
+<img src={hit.image}/>
+</div>
+<div className="hit-content">
+<div className="hit-price">
+${hit.price}
+</div>
+<div className="hit-name">
+<Highlight attributeName="name" hit="hit"/>
+</div>
+</div>
+</div>
+
+const Sidebar = () => 
+<div className="sidebar">
+
+</div>
+
+const Content = () => 
+<div className="content">
+<Hits hitComponent={Hit}/>
+</div>
+
+class App extends Component{
+  render(){
+    return(
+      <div>
+      <InstantSearch
+      apiKey="e1c15bc28fe91be13cacbeb82ca842bb"
+      appId="L21XOR2WJ7"
+      indexName="mysearch">
+      <header>
+      <img src=""/>
+      <SearchBox translations={{placeholder:'Search for Products'}}/>
       </header>
-    </div>
-  );
+
+      <main>
+      <Sidebar/>
+      <Content/>
+      </main>
+
+      </InstantSearch>
+      </div>
+      )
+  }
 }
 
 export default App;
